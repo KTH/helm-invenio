@@ -103,28 +103,6 @@ spec:
               name: {{ .valueFrom.secretKeyRef.name }}
               key: {{ .valueFrom.secretKeyRef.key }}
         {{- end }}
-        readinessProbe:
-          exec:
-            command:
-              - /bin/bash
-              - -c
-              - "uwsgi_curl -X HEAD -H 'Host: {{ .Values.host }}' $(hostname):5000 /ping"
-          failureThreshold: {{ .Values.web.readinessProbe.failureThreshold }}
-          initialDelaySeconds: {{ .Values.web.readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.web.readinessProbe.periodSeconds }}
-          successThreshold: {{ .Values.web.readinessProbe.successThreshold }}
-          timeoutSeconds: {{ .Values.web.readinessProbe.timeoutSeconds }}
-        startupProbe:
-          exec:
-            command:
-              - /bin/bash
-              - -c
-              - "uwsgi_curl -X HEAD -H 'Host: {{ .Values.host }}' $(hostname):5000 /ping"
-          failureThreshold: {{ .Values.web.startupProbe.failureThreshold }}
-          initialDelaySeconds: {{ .Values.web.startupProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.web.startupProbe.periodSeconds }}
-          successThreshold: {{ .Values.web.startupProbe.successThreshold }}
-          timeoutSeconds: {{ .Values.web.startupProbe.timeoutSeconds }}
         volumeMounts:
           - name: uwsgi-config
             mountPath: '/opt/invenio/src/uwsgi'
