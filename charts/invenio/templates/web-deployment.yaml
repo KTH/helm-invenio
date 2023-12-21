@@ -129,6 +129,10 @@ spec:
         - containerPort: 8080
           protocol: TCP
         volumeMounts:
+        - mountPath: /etc/ssl/private
+          name: snakeoil-key
+        - mountPath: /etc/ssl/certs
+          name: snakeoil-crt
         - name: nginx-config
           mountPath: /etc/nginx/conf.d
         - name: var-run
@@ -219,6 +223,14 @@ spec:
         {{- end }}
 
       volumes:
+      - name: snakeoil-crt
+        secret:
+          defaultMode: 400
+          secretName: nginx-snakeoil-tls-crt
+      - name: snakeoil-key
+        secret:
+          defaultMode: 400
+          secretName: nginx-snakeoil-tls-key
       {{- if .Values.logstash.enabled }}
       - name: config
         configMap:

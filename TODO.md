@@ -8,7 +8,7 @@ Create this `ignore.kth-values.yaml`:
 haproxy:
   enabled: false
 
-host: invenio-dev.referens.sys.kth.se
+host: localhost
 
 postgresql:
   enabled: true
@@ -44,6 +44,8 @@ workerBeat:
 Then run this, with some time in between:
 
 ```shell
+kubectl create secret generic nginx-snakeoil-tls-key --from-file=test.key=./test.key -n invenio-dev
+kubectl create secret generic nginx-snakeoil-tls-crt --from-file=test.crt=./test.crt -n invenio-dev
 helm install -n invenio-dev invenio ./charts/invenio/ -f ./ignore.kth-values.yaml
 kubectl exec -it "$(kubectl get pods -l app=worker -o name)" -- /opt/invenio/src/wipe_recreate.sh
 kubectl delete "$(kubectl get pods -l app=web -o name)"
