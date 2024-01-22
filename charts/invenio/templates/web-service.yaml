@@ -13,5 +13,8 @@ spec:
     - name: 'http'
       port: 80
       targetPort: 8080
+    - name: 'https'
+      port: 443
+      targetPort: 443
   selector:
     app: web

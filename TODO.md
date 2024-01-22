@@ -12,5 +12,5 @@ kubectl exec -it "$(kubectl get pods -l app=worker -o name)" -- /opt/invenio/src
 kubectl delete "$(kubectl get pods -l app=web -o name)"
 kubectl exec -it "$(kubectl get pods -l app=worker -o name)" -- invenio alembic upgrade
 kubectl exec -it "$(kubectl get pods -l app=worker -o name)" -- invenio queues declare
-kubectl port-forward svc/web 8080:80
+sudo kubectl port-forward svc/web 443:443
 ```
