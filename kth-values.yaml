@@ -1,0 +1,34 @@
+haproxy:
+  enabled: false
+
+host: localhost
+
+postgresql:
+  enabled: true
+
+search:
+  enabled: true
+
+web:
+  image: ghcr.io/inveniosoftware/demo-inveniordm/demo-inveniordm@sha256:2193abc2caec9bc599061d6a5874fd2d7d201f55d1673a545af0a0406690e8a4
+  replicas: 1
+
+worker:
+  image: ghcr.io/inveniosoftware/demo-inveniordm/demo-inveniordm@sha256:2193abc2caec9bc599061d6a5874fd2d7d201f55d1673a545af0a0406690e8a4
+  replicas: 1
+  resources:
+    requests:
+      cpu: "2"
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 1Gi
+
+workerBeat:
+  resources:
+    requests:
+      cpu: "2"
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 1Gi
