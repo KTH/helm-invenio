@@ -1,7 +1,13 @@
 haproxy:
   enabled: false
 
-host: localhost
+host: invenio-dev.kth-prod-1.sys.kth.se
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  enabled: true
+  class: nginx
 
 postgresql:
   enabled: true
